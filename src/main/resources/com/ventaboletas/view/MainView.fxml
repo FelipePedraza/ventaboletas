@@ -17,9 +17,6 @@
     <Label text="Nombre del Cliente:"/>
     <TextField fx:id="nombreField" promptText="Ingrese el nombre"/>
 
-    <Label text="Prioridad:"/>
-    <ComboBox fx:id="prioridadBox" prefWidth="150"/>
-
     <Label text="Tipo de Entrada:"/>
     <ComboBox fx:id="tipoEntradaBox" prefWidth="150"/>
 

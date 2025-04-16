@@ -13,8 +13,6 @@ public class MainViewController {
     @FXML
     private TextField nombreField;
     @FXML
-    private ComboBox<String> prioridadBox;
-    @FXML
     private ComboBox<String> tipoEntradaBox;
     @FXML
     private Button agregarBtn;
@@ -27,9 +25,6 @@ public class MainViewController {
 
     @FXML
     private void initialize() {
-        // Inicializar los ComboBox con los valores deseados
-        prioridadBox.getItems().addAll("Alta", "Media", "Baja");
-        prioridadBox.getSelectionModel().selectFirst();
 
         tipoEntradaBox.getItems().addAll("VIP", "Preferencial", "General");
         tipoEntradaBox.getSelectionModel().select("General");
@@ -41,19 +36,18 @@ public class MainViewController {
     @FXML
     private void agregarCliente() {
         String nombre = nombreField.getText().trim();
-        String prioridadStr = prioridadBox.getValue();
         String tipoEntrada = tipoEntradaBox.getValue();
-
-        if(nombre.isEmpty()){
-            colaTextArea.appendText("Por favor ingrese el nombre del cliente.\n");
+    
+        if (nombre.isEmpty()) {
+            colaTextArea.appendText("Por favor, ingrese el nombre del cliente.\n");
             return;
         }
-        int prioridad = convertirPrioridad(prioridadStr);
+        
+        int prioridad = getPrioridadPorCategoria(tipoEntrada);
         Cliente cliente = new Cliente(nombre, prioridad, tipoEntrada);
         cola.agregarCliente(cliente);
-        colaTextArea.appendText("Agregado: " + nombre + " [Prioridad " + prioridadStr + ", " + tipoEntrada + "]\n");
-
-        // Limpiar campos para siguiente ingreso
+        colaTextArea.appendText("Agregado: " + nombre + " [Tipo de Entrada: " + tipoEntrada + ", Prioridad: " + prioridad + "]\n");
+    
         nombreField.clear();
     }
 
@@ -67,12 +61,15 @@ public class MainViewController {
         }
     }
 
-    private int convertirPrioridad(String prioridadStr) {
-        switch (prioridadStr) {
-            case "Alta": return 1;
-            case "Media": return 2;
-            case "Baja": return 3;
-            default: return 3;
+    private int getPrioridadPorCategoria(String categoria) {
+        switch (categoria) {
+            case "VIP": 
+                return 1; // Alta prioridad
+            case "Preferencial": 
+                return 2; // Media prioridad
+            case "General": 
+            default:
+                return 3; // Baja prioridad
         }
     }
 }
