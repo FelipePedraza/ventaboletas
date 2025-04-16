@@ -1,5 +1,4 @@
 package com.ventaboletas.model;
-import java.util.PriorityQueue;
 
 public class ColaBoletas {
     private PriorityQueue<Cliente> cola;
