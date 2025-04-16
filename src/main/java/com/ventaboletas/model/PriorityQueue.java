@@ -47,7 +47,7 @@ public class PriorityQueue<T extends Comparable<T>> {
     
     public T poll() {
         if (isEmpty()) {
-            throw new RuntimeException("Queue is empty");
+            return null;
         }
         T data = front.data;
         front = front.next;
@@ -63,8 +63,6 @@ public class PriorityQueue<T extends Comparable<T>> {
         front = null;
         size = 0;
     }
-    
-    // Puedes mantener otros métodos (como clone o reverse) si son necesarios,
-    // aunque en una estructura de priority queue su utilidad dependerá de tu caso.
+
 }
 
