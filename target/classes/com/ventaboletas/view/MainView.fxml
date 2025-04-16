@@ -1,32 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.ventaboletas.controller.MainViewController" spacing="10">
-    <padding>
-        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
-    </padding>
+      fx:controller="com.ventaboletas.controller.MainViewController"
+      spacing="15" alignment="CENTER" style="-fx-background-color: #f4f4f4; -fx-padding: 15;">
+    
+    <!-- Título principal -->
+    <StackPane prefWidth="600" prefHeight="60">
+        <Rectangle width="600" height="60" arcWidth="15" arcHeight="15">
+            <fill>
+                <LinearGradient startX="0" startY="0" endX="1" endY="0" proportional="true" cycleMethod="NO_CYCLE">
+                    <stops>
+                        <Stop offset="0.0" color="#2196F3"/>
+                        <Stop offset="1.0" color="#0D47A1"/>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <Label text="¡Boletas Express: Vive la Emoción del Fútbol!" 
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"
+               maxWidth="Infinity" wrapText="true" alignment="CENTER"/>
+    </StackPane>
+    <!-- Separador para dividir el título de la sección de ingreso -->
+    <Separator prefWidth="300"/>
+
     <!-- Sección para ingresar información del cliente -->
-    <Label text="Nombre del Cliente:"/>
-    <TextField fx:id="nombreField" promptText="Ingrese el nombre"/>
+    <VBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Nombre del Cliente:" style="-fx-font-size: 14px; -fx-text-fill: #555;"/>
+        <TextField fx:id="nombreField" promptText="Ingrese el nombre" prefWidth="300"
+                   style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 5;"/>
+    </VBox>
 
-    <Label text="Tipo de Entrada:"/>
-    <ComboBox fx:id="tipoEntradaBox" prefWidth="150"/>
+    <VBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Tipo de Entrada:" style="-fx-font-size: 14px; -fx-text-fill: #555;"/>
+        <ComboBox fx:id="tipoEntradaBox" prefWidth="300"
+                  style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 5;"/>
+    </VBox>
 
-    <Button fx:id="agregarBtn" text="Agregar Cliente" onAction="#agregarCliente" prefWidth="150"/>
+    <!-- Botón para agregar cliente -->
+    <Button fx:id="agregarBtn" text="Agregar Cliente" onAction="#agregarCliente" prefWidth="150"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 5;"/>
+
+    <!-- Separador para dividir la sección de ingreso y atención -->
+    <Separator prefWidth="300"/>
 
     <!-- Sección para atender clientes -->
-    <Button fx:id="atenderBtn" text="Atender Siguiente Cliente" onAction="#atenderSiguiente" prefWidth="200"/>
+    <HBox alignment="CENTER" spacing="10">
+        <Button fx:id="atenderBtn" text="Atender Siguiente Cliente" onAction="#atenderSiguiente" prefWidth="200"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 5;"/>
+    </HBox>
     
     <!-- Área para mostrar la cola y eventos -->
-    <Label text="Estado de la Cola:"/>
-    <TextArea fx:id="colaTextArea" prefHeight="200" wrapText="true"/>
+    <VBox spacing="5" alignment="CENTER_LEFT">
+        <Label text="Estado de la Cola:" style="-fx-font-size: 14px; -fx-text-fill: #555;"/>
+        <TextArea fx:id="colaTextArea" prefHeight="200" prefWidth="300" wrapText="true"
+                  style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 5;"/>
+    </VBox>
 
 </VBox>
