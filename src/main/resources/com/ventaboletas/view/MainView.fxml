@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.ventaboletas.controller.MainViewController" spacing="10">
+    <padding>
+        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+    </padding>
+    <!-- Sección para ingresar información del cliente -->
+    <Label text="Nombre del Cliente:"/>
+    <TextField fx:id="nombreField" promptText="Ingrese el nombre"/>
+
+    <Label text="Prioridad:"/>
+    <ComboBox fx:id="prioridadBox" prefWidth="150"/>
+
+    <Label text="Tipo de Entrada:"/>
+    <ComboBox fx:id="tipoEntradaBox" prefWidth="150"/>
+
+    <Button fx:id="agregarBtn" text="Agregar Cliente" onAction="#agregarCliente" prefWidth="150"/>
+
+    <!-- Sección para atender clientes -->
+    <Button fx:id="atenderBtn" text="Atender Siguiente Cliente" onAction="#atenderSiguiente" prefWidth="200"/>
+    
+    <!-- Área para mostrar la cola y eventos -->
+    <Label text="Estado de la Cola:"/>
+    <TextArea fx:id="colaTextArea" prefHeight="200" wrapText="true"/>
+
+</VBox>
