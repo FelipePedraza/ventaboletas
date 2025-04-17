@@ -1,5 +1,8 @@
 package com.ventaboletas.controller;
 
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import com.ventaboletas.model.Cliente;
 import com.ventaboletas.model.ColaBoletas;
 import javafx.fxml.FXML;
@@ -37,6 +40,7 @@ public class MainViewController {
     private void agregarCliente() {
         String nombre = nombreField.getText().trim();
         String tipoEntrada = tipoEntradaBox.getValue();
+          
     
         if (nombre.isEmpty()) {
             colaTextArea.appendText("Por favor, ingrese el nombre del cliente.\n");
@@ -46,7 +50,8 @@ public class MainViewController {
         int prioridad = getPrioridadPorCategoria(tipoEntrada);
         Cliente cliente = new Cliente(nombre, prioridad, tipoEntrada);
         cola.agregarCliente(cliente);
-        colaTextArea.appendText("Agregado: " + nombre + " [Tipo de Entrada: " + tipoEntrada + ", Prioridad: " + prioridad + "]\n");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        colaTextArea.appendText("Agregado: " + nombre + " [Tipo de Entrada: " + tipoEntrada + ", Prioridad: " + prioridad + ", Fecha: " + LocalDateTime.now().format(formato) + "]\n");
     
         nombreField.clear();
     }

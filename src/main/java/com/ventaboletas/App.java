@@ -16,7 +16,7 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/com/ventaboletas/view/MainView.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Venta de Boletas - Cola de Prioridad");
+        primaryStage.setTitle("Venta de Boletas");
         primaryStage.show();
     }
 
