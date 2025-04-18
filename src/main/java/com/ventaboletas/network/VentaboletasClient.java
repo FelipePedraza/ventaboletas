@@ -89,7 +89,7 @@ public class VentaboletasClient {
             ColaBoletas cola = obtenerCola();
             while (cola != null) {
                 try {
-                    Thread.sleep(5000); // Espera 5 segundos antes de volver a consultar
+                    Thread.sleep(1000); // Espera 5 segundos antes de volver a consultar
                     ColaBoletas nuevaCola = obtenerCola();
                     if (nuevaCola != null && !nuevaCola.equals(cola)) {
                         cola = nuevaCola;
