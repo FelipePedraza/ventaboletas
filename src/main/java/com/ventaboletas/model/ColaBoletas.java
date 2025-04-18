@@ -1,18 +1,21 @@
 package com.ventaboletas.model;
 
-public class ColaBoletas {
-    private PriorityQueue<Cliente> cola;
+import java.io.Serializable;
+import com.ventaboletas.util.PriorityQueue;
+
+public class ColaBoletas implements Serializable{
+    private PriorityQueue<Boleta> cola;
 
     public ColaBoletas() {
         cola = new PriorityQueue<>();
     }
 
-    public void agregarCliente(Cliente c) {
+    public void agregarCliente(Boleta c) {
         cola.offer(c);
     }
 
-    public Cliente atenderCliente() {
-        return cola.poll(); // Retorna y remueve el cliente de mayor prioridad (menor valor)
+    public Boleta atenderCliente() throws InterruptedException {
+        return cola.poll();
     }
 
     public boolean estaVacia() {
@@ -21,6 +24,10 @@ public class ColaBoletas {
 
     public int tamañoCola() {
         return cola.size();
+    }
+
+    public PriorityQueue<Boleta> getCola() {
+        return cola.clone(); // Retorna una copia de la cola para evitar modificaciones externas
     }
 }
 

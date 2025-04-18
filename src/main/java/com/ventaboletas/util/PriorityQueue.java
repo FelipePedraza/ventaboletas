@@ -1,7 +1,11 @@
-package com.ventaboletas.model;
+package com.ventaboletas.util;
 
-public class PriorityQueue<T extends Comparable<T>> {
-    private class Node {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PriorityQueue<T extends Comparable<T>> implements Serializable {
+    private class Node implements Serializable{
         private T data;
         private Node next;
     
@@ -27,7 +31,7 @@ public class PriorityQueue<T extends Comparable<T>> {
      * Inserta el elemento en orden ascendente: 
      * se asume que un elemento "menor" es de mayor prioridad.
      */
-    public void offer(T data) {
+    public synchronized void offer(T data) {
         Node newNode = new Node(data);
         // Si la cola está vacía o el nuevo dato tiene mayor prioridad que el front
         if (isEmpty() || data.compareTo(front.data) < 0) {
@@ -43,9 +47,10 @@ public class PriorityQueue<T extends Comparable<T>> {
             current.next = newNode;
         }
         size++;
+        notifyAll(); // Notificar a los hilos en espera
     }
     
-    public T poll() {
+    public synchronized T poll() {
         if (isEmpty()) {
             return null;
         }
@@ -55,13 +60,44 @@ public class PriorityQueue<T extends Comparable<T>> {
         return data;
     }
     
-    public int size() {
+    /**
+     * Bloqueante: espera hasta que haya un elemento.
+     
+    public synchronized T pollBlocking() throws InterruptedException {
+        while (isEmpty()) {
+            wait();
+        }
+        return poll();
+    }
+    */
+
+    public synchronized int size() {
         return size;
     }
-    
-    public void clear() {
+
+    public synchronized void clear() {
         front = null;
         size = 0;
+    }
+
+    @Override
+    public synchronized PriorityQueue<T> clone() {
+        PriorityQueue<T> clonedQueue = new PriorityQueue<>();
+        Node current = front;
+        while (current != null) {
+            clonedQueue.offer(current.data);
+            current = current.next;
+        }
+        return clonedQueue;
+    }
+    public synchronized List<T> toList() {
+        List<T> list = new ArrayList<>();
+        Node current = front;
+        while (current != null) {
+            list.add(current.data);
+            current = current.next;
+        }
+        return list;
     }
 
 }

@@ -1,18 +1,22 @@
 package com.ventaboletas.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Cliente implements Comparable<Cliente> {
+public class Boleta implements Comparable<Boleta>, Serializable {
+
     private String nombre;
     private int prioridad; // 1: Alta, 2: Media, 3: Baja
     private String tipoEntrada; // VIP, Preferencial, General
     private LocalDateTime fechaCompra;
+    private String asiento;
 
 
-    public Cliente(String nombre, int prioridad, String tipoEntrada) {
+    public Boleta(String nombre, int prioridad, String tipoEntrada, String asiento) {
         this.nombre = nombre;
         this.prioridad = prioridad;
         this.tipoEntrada = tipoEntrada;
+        this.asiento = asiento;
         this.fechaCompra = LocalDateTime.now();; // Fecha de la venta automáticamente
     }
 
@@ -48,9 +52,17 @@ public class Cliente implements Comparable<Cliente> {
     public void setFechaCompra(LocalDateTime fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
+    
+    public String getAsiento() {
+        return asiento;
+    }
+
+    public void setAsiento(String asiento) {
+        this.asiento = asiento;
+    }
 
     @Override
-    public int compareTo(Cliente otro) {
+    public int compareTo(Boleta otro) {
         return Integer.compare(this.prioridad, otro.prioridad);
     }
 }
