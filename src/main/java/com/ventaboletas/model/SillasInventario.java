@@ -25,9 +25,9 @@ public class SillasInventario implements Serializable {
         vipSeats = new Queue<>();
         prefSeats = new Queue<>();
         genSeats = new Queue<>();
-        for (int i = 1; i <= 1; i++) vipSeats.offer("A" + i);
-        for (int i = 1; i <= 2; i++) prefSeats.offer("B" + i);
-        for (int i = 1; i <= 5; i++) genSeats.offer("C" + i);
+        for (int i = 1; i <= 3; i++) vipSeats.offer("A" + i);
+        for (int i = 1; i <= 5; i++) prefSeats.offer("B" + i);
+        for (int i = 1; i <= 10; i++) genSeats.offer("C" + i);
     }
 
     private synchronized void load() throws IOException, ClassNotFoundException {
